@@ -1,0 +1,202 @@
+<template>
+  <header
+    class="
+      flex
+      items-center
+      justify-between
+      px-6
+      py-2
+      bg-white
+      border-b-4 border-indigo-600
+    "
+  >
+    <div class="flex items-center">
+      <button
+        @click="isOpen = true"
+        class="text-gray-500 focus:outline-none lg:hidden"
+      >
+        <svg
+          class="w-6 h-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4 6H20M4 12H20M4 18H11"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+      <div class="relative mx-4 lg:mx-0">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+
+        <input
+          class="
+            w-32
+            pl-10
+            pr-4
+            py-2
+            text-indigo-600
+            rounded-md
+            sm:w-64
+          "
+          type="text"
+          placeholder="Search"
+          style="outline: none; border: none"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <div class="flex items-center">
+        <div class="relative">
+          <button
+            @click="notificationOpen = !notificationOpen"
+            class="flex mx-4 text-gray-600 focus:outline-none"
+          >
+            <svg
+              class="h-6 w-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div
+            v-show="notificationOpen"
+            @click="notificationOpen = false"
+            class="fixed inset-0 h-full w-full z-10"
+          ></div>
+
+          <div
+            v-show="notificationOpen"
+            class="
+              absolute
+              right-0
+              mt-2
+              w-80
+              bg-white
+              rounded-lg
+              shadow-xl
+              overflow-hidden
+              z-10
+            "
+            style="width: 20rem"
+          >
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <button
+          @click="dropdownOpen = !dropdownOpen"
+          class="
+            relative
+            z-10
+            block
+            w-8
+            h-8
+            overflow-hidden
+            rounded-full
+            shadow
+            focus:outline-none
+          "
+        >
+          <img
+            class="object-cover w-full h-full"
+            src="https://cdn-data.gtvplus.vn/store/item/image/1110/11100048/11100048_7.png"
+            alt="Your avatar"
+          />
+        </button>
+
+        <div
+          v-show="dropdownOpen"
+          @click="dropdownOpen = false"
+          class="fixed inset-0 z-10 w-full h-full"
+        ></div>
+
+        <transition
+          enter-active-class="transition duration-150 ease-out transform"
+          enter-from-class="scale-95 opacity-0"
+          enter-to-class="scale-100 opacity-100"
+          leave-active-class="transition duration-150 ease-in transform"
+          leave-from-class="scale-100 opacity-100"
+          leave-to-class="scale-95 opacity-0"
+        >
+          <div
+            v-show="dropdownOpen"
+            class="
+              absolute
+              right-0
+              z-20
+              w-48
+              py-1
+              mt-2
+              bg-white
+              rounded-lg
+              shadow-xl
+            "
+          >
+            <router-link
+              to="/"
+              class="
+                flex
+                px-4
+                py-2
+                rounded-md
+                text-sm text-gray-700
+                hover:bg-indigo-600 hover:text-white
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+              Log out</router-link
+            >
+          </div>
+        </transition>
+      </div>
+    </div>
+  </header>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+import { useSidebar } from "@/hooks/useSidebar";
+
+const dropdownOpen = ref(false);
+const { isOpen } = useSidebar();
+const notificationOpen = ref(false);
+</script>

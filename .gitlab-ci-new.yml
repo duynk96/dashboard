@@ -1,0 +1,8 @@
+include:
+  - project: 'gtv-devops/gplay-cicd-template'
+    ref: main
+    file: '.gitlab-ci-base-template.yml'
+
+variables:
+  APP_NAME: gtv-frontend-icom-dashboard
+  APP_NAME_ECR: frontend-icom-dashboard
