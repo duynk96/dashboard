@@ -10,7 +10,7 @@
       </main>
       <Footer />
     </div>
-    <!-- <PopupLoading /> -->
+    <PopupLoading />
     <PopupAdd />
     <PopupUpload />
   </div>
@@ -30,7 +30,7 @@ export default defineComponent({
     Sidebar,
     Header,
     Footer,
-    // PopupLoading,
+    PopupLoading,
     PopupAdd,
     PopupUpload
   },

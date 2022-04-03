@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading" class="splash-screen">
+  <div v-if="isShowPopup" class="splash-screen">
     <div class="loader">
       <div class="outer"></div>
       <div class="middle"></div>
@@ -8,17 +8,20 @@
   </div>
 </template>
 <script>
+import { loading } from "@/store/loading";
 export default {
-  name:"p-loading",
-  data: () => ({
-    loading: true,
-  }),
+  name: "p-loading",
   methods: {
     start() {
       this.loading = true;
     },
     finish() {
       this.loading = false;
+    },
+  },
+  computed: {
+    isShowPopup() {
+      return loading().getIsPopup;
     },
   },
 };
@@ -78,7 +81,6 @@ export default {
     transform: rotate(360deg);
   }
 }
-
 
 @-webkit-keyframes sk-scaleout {
   0% {

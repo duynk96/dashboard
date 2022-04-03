@@ -149,7 +149,7 @@
             hover:bg-gray-50
             dark:hover:bg-gray-600
           "
-          v-for="(value, index) in getRow"
+          v-for="(value, index) in product"
           :key="index"
         >
           <td class="w-4 p-4">
@@ -186,16 +186,20 @@
               whitespace-nowrap
             "
           >
-            {{product.product_name}} {{ index }}
+            {{ value.Name }}
           </th>
-          <td class="px-6 py-4">{{product.product_color}}</td>
-          <td class="px-6 py-4">{{product.product_category}}</td>
-          <td class="px-6 py-4">{{product.product_price}}</td>
+          <td class="px-6 py-4">{{ value.Id }}</td>
+          <td class="px-6 py-4">{{ value.CreatedAt }}</td>
+          <td class="px-6 py-4">{{ value.UpdatedAt }}</td>
 
           <td class="px-6 py-4 text-right">
             <div class="flex justify-end">
               <span class="text-yellow-500 flex justify-center">
-                <button href="#" class="mx-2 px-2 rounded-md" v-on:click="onUpdate(product)">
+                <button
+                  href="#"
+                  class="mx-2 px-2 rounded-md"
+                  v-on:click="onUpdate(value)"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 text-green-700"
@@ -275,7 +279,7 @@ export default defineComponent({
     },
     onUpdate(data) {
       this.$emit("updateRow", data);
-    }
+    },
   },
   components: {
     VueTailwindPagination,
@@ -286,13 +290,10 @@ export default defineComponent({
       perPage: 5,
       total: 20,
       row: 5,
-      product: {
-        product_name: "Apple MacBook Pro",
-        product_color: "Sliver",
-        product_category: "Laptop",
-        product_price: 2999
-      }
     };
+  },
+  props: {
+    product: [],
   },
 });
 </script>
